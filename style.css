@@ -8,3 +8,7 @@ div#color {
   height: 200px;
   border: 1px solid #000000;
 }
+
+#new, #submit {
+  margin-top:20px;
+}
