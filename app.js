@@ -1,5 +1,12 @@
 function main() {
 	newColor();
+	$("#sliders").children().slider({
+		min:0,
+		max:255,
+		slide: function(event, ui) {}
+	});
+	var values = $("#sliders").children().slider("value");
+
 }
 
 function newColor() {
