@@ -1,10 +1,5 @@
 function main() {
 	newColor();
-	var color = document.getElementById("sliders");
-	var child = color.childNodes;
-	for(var i = 0; i < child.length; ++i) {
-		child.slider();
-	}
 }
 
 function newColor() {
