@@ -1,3 +1,4 @@
+// Homework 2
 function main() {
 	//start of recursion outputs to tags variable
 	var tags = get(document, "");
