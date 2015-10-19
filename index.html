@@ -2,12 +2,29 @@
 <html>
 <head>
   <title>Game of Doom</title>
-  <link rel=stylesheet href="lab3Solution.css"/>
+  <link rel=stylesheet href="style.css"/>
+  <script src="app.js"></script>
 </head>
 <body onload="main()">
-  <h1>Color matching matching color</h1>
+  <h1>Hexxed</h1>
+
+  <!--Describes how to play the game to the user-->
+  <p id="decription"></p>
+
+  <!--Display the color user is trying to match-->
   <div class="color"></div>
+
+  <!--The sliders the user can manipulate-->
+  <div id="sliders">
+  	<!--red slider-->
+  	<div id="red"></div>
+
+  	<!--green slider-->
+  	<div id="green"></div>
+
+  	<!--blue slider-->
+  	<div id="blue"></div>
+  </div>
 
 </body>
 </html>
-
