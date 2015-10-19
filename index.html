@@ -7,22 +7,25 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js">
     </script>
     <script>
-    $( "#red" ).slider({
+   		$( "#red" ).slider({
   			min:0,
   			max:255,
-  			slide: function(event, ui) {}
+  			slide: function(event, ui) {value:}
 
 		});
 		$( "#green" ).slider({
   			min:0,
   			max:255,
-  			slide: function(event, ui) {}
+  			slide: function(event, ui) {value:}
 		});
 		$( "#blue" ).slider({
   			min:0,
   			max:255,
-  			slide: function(event, ui) {}
+  			slide: function(event, ui) {value:}
 		});
+		var rvalue = $("#red").slider("option", "value");
+		var gvalue = $("#green").slider("option", "value");
+		var bvalue = $("#blue").slider("option", "value");
     </script>
 	<script src="app.js"></script>
 </head>
