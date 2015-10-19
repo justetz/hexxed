@@ -3,29 +3,9 @@
 <head>
 	<title>Game of Doom</title>
 	<link rel=stylesheet href="style.css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js">
-    </script>
-    <script>
-   		$( "#red" ).slider({
-  			min:0,
-  			max:255,
-  			slide: function(event, ui) {value:}
-
-		});
-		$( "#green" ).slider({
-  			min:0,
-  			max:255,
-  			slide: function(event, ui) {value:}
-		});
-		$( "#blue" ).slider({
-  			min:0,
-  			max:255,
-  			slide: function(event, ui) {value:}
-		});
-		var rvalue = $("#red").slider("option", "value");
-		var gvalue = $("#green").slider("option", "value");
-		var bvalue = $("#blue").slider("option", "value");
     </script>
 	<script src="app.js"></script>
 </head>
@@ -51,6 +31,8 @@
 
 			<!--blue slider-->
 			<div id="blue"></div>
+
+      <p id="currentVals">Current: Red <span id="redVal">0</span>; Green <span id="greenVal">0</span>; Blue <span id="blueVal">0</span></p>
 		</div>
 
 		<!--Submits-->
