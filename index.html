@@ -1,44 +1,19 @@
 <!doctype html>
 <html>
 <head>
-	<title>Game of Doom</title>
+	<title>Hexxed</title>
 	<link rel=stylesheet href="style.css"/>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="app.js"></script>
 </head>
-	<body onload="main()">
+	<body>
 		<h1>Hexxed</h1>
+
+		<div id="hexxed"></div>
 
 		<!--Describes how to play the game to the user-->
 		<p id="decription"></p>
-
-		<!--Display the color user is trying to match-->
-		<div id="color"></div>
-
-		<!--Gets new color-->
-		<button type="button" id="new" onclick="newColor()">Try a different color</button>
-
-		<!--The sliders the user can manipulate-->
-		<div id="sliders">
-			<!--red slider-->
-			<div id="red"></div>
-
-			<!--green slider-->
-			<div id="green"></div>
-
-			<!--blue slider-->
-			<div id="blue"></div>
-
-      <p id="currentVals">Current: Red <span id="redVal">0</span>; Green <span id="greenVal">0</span>; Blue <span id="blueVal">0</span></p>
-		</div>
-
-		<!--Submits-->
-		<button type="button" id="submit">Submit!</button>
-
-		<!--Return the result on click of submit-->
-		<h2 id="result"></h2>
-
 	</body>
 </html>

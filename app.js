@@ -1,30 +1,111 @@
-$(document).ready(function() {
-	function main() {
-		newColor();
-	}
+/**
+ * The Hexxed jQuery plugin generates a fully-functioning, self-contained color
+ * guessing game.
+ * @return {jQuery} The jQuery object for chained calls
+ */
+$.fn.hexxed = function() {
+	/**
+	 * Contains the color that user is trying to guess
+	 * @type {Object}
+	 */
+	var color = { red: 0, green: 0, blue: 0 };
 
-	function newColor() {
-		//get random color
-		var color = '#'+Math.floor(Math.random()*16777215).toString(16);
-		document.getElementById("color").style.backgroundColor = color;
-	}
-	
+	/**
+	 * Contains the user's guess
+	 * @type {Object}
+	 */
+	var guess = { red: 0, green: 0, blue: 0 };
+
+	/**
+	 * This function is applied to the slide and stop arguments of the slider
+	 * jquery objects for the Hexxed game.
+	 * @param  {Object} event
+	 * @param  {Object} ui
+	 */
+	var updateFunction = function(event, ui) {
+		$('#' + event.target.id + 'Val').html($("#"+event.target.id).slider("option", "value"));
+		guess[event.target.id] = parseInt($("#"+event.target.id).slider("option", "value"));
+	};
+
+	/**
+	 * Serves as the reusable object that's passed as an argument when creating
+	 * the sliders.
+	 * @type {Object}
+	 */
 	var sliderObject = {
 		min:0,
 		max:255,
-		slide: function(event, ui) {
-			$('#' + event.target.id + 'Val').html($("#"+event.target.id).slider("option", "value"));
-		}
+		slide: updateFunction,
+		stop: updateFunction
 	};
 
-	$( "#red" ).slider(sliderObject);
-	$( "#green" ).slider(sliderObject);
-	$( "#blue" ).slider(sliderObject);
-});
+	function newColor() {
+		//get random color
+		color.red   = Math.floor(Math.random()*255);
+		color.blue  = Math.floor(Math.random()*255);
+		color.green = Math.floor(Math.random()*255);
 
-/*
-<script>
-var rvalue = $("#red").slider("option", "value");
-var gvalue = $("#green").slider("option", "value");
-var bvalue = $("#blue").slider("option", "value");
-</script>*/
+		var color_string = "rgb(" + color.red + "," + color.blue + "," + color.green + ")";
+
+		document.getElementById("color").style.backgroundColor = color_string;
+	}
+
+	function check() {
+		var score = {
+			red: (Math.abs(color.red - guess.red)/255)*100,
+			green: (Math.abs(color.green - guess.green)/255)*100,
+			blue: (Math.abs(color.blue - guess.blue)/255)*100
+		};
+
+		var average = (score.red + score.green + score.blue)/3;
+		$("#currentVals").html("Percent: " + average);
+
+		if(average === 100) {
+			$("#currentVals").html("Match!");
+		}
+	}
+
+	// Display the color user is trying to match
+	this.append($('<div>').attr("id", "color"));
+
+	// Gets new color
+	this.append($('<button>').attr("type","button").attr("id", "new").click(newColor).text("Try a different color"));
+
+	// The sliders the user can manipulate
+
+	// Red slider
+	this.append($('<div>').attr("id", "red").slider(sliderObject));
+
+	// Green slider
+	this.append($('<div>').attr("id", "green").slider(sliderObject));
+
+	// Blue slider
+	this.append($('<div>').attr("id", "blue").slider(sliderObject));
+
+	// Current value indicators
+	var redVal = $('<span>').attr('id', 'redVal').text('0'),
+		greenVal = $('<span>').attr('id', 'greenVal').text('0'),
+		blueVal = $('<span>').attr('id', 'blueVal').text('0'),
+		currentVals = $('<p>').attr("id", "currentVals");
+
+	currentVals.append('Current: Red ').append(redVal);
+	currentVals.append('; Green ').append(greenVal);
+	currentVals.append('; Blue ').append(blueVal);
+
+	this.append(currentVals);
+	//this.append($('<p>').attr("id", "currentVals").html('Current: Red <span id="redVal">0</span>; Green <span id="greenVal">0</span>; Blue <span id="blueVal">0</span>'));
+
+	// Submit button
+	this.append($('<button>').attr("type", "button").attr("id", "submit").text("Submit!").click(check));
+
+	// Result area
+	this.append($('<div>').attr("id", "result"));
+
+	newColor();
+
+	return this;
+}
+
+$(document).ready(function() {
+	$("#hexxed").hexxed();
+});

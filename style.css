@@ -13,12 +13,12 @@ div#color {
   margin-top:20px;
 }
 
-#green, #blue {
+#red, #blue, #green {
+  width: 50%;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
-#sliders {
-  width: 50%;
-  margin: 0 auto;
+#green, #blue {
   margin-top: 20px;
 }
