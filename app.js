@@ -23,8 +23,11 @@ $.fn.hexxed = function() {
 	 * @param  {Object} ui
 	 */
 	var updateFunction = function(event, ui) {
-		$('#' + event.target.id + 'Val').html($("#"+event.target.id).slider("option", "value"));
-		guess[event.target.id] = parseInt($("#"+event.target.id).slider("option", "value"));
+		var sliderColor = event.target.id;
+		var value = $("#" + sliderColor).slider("option", "value");
+
+		$('#' + sliderColor + 'Val').html(value);
+		guess[sliderColor] = parseInt(value);
 	};
 
 	/**
@@ -93,7 +96,6 @@ $.fn.hexxed = function() {
 	currentVals.append('; Blue ').append(blueVal);
 
 	this.append(currentVals);
-	//this.append($('<p>').attr("id", "currentVals").html('Current: Red <span id="redVal">0</span>; Green <span id="greenVal">0</span>; Blue <span id="blueVal">0</span>'));
 
 	// Submit button
 	this.append($('<button>').attr("type", "button").attr("id", "submit").text("Submit!").click(check));
