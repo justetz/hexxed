@@ -2,19 +2,36 @@ body {
   text-align: center;
 }
 
-div#color {
+div#hexxed {
+	width: 50%;
+	margin: 0 auto;
+}
+
+div#color, div#guess {
   margin: 0 auto;
   width: 200px;
   height: 200px;
   border: 1px solid #000000;
 }
+hr {
+	border: none;
+	color: #000;
+	clear: both;
+}
+div#color {
+    float: left;
+}
+div#guess {
+	float: right;
+}
 
 #new, #submit {
   margin-top:20px;
+  clear: both;
 }
 
 #red, #blue, #green {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 20px;
 }
