@@ -56,15 +56,15 @@ $.fn.hexxed = function(settings) {
 	 */
 	var updateFunction = function(event, ui) {
 		var sliderColor = event.target.id;
-		var value = $("#" + sliderColor).slider("option", "value");
+		var value = $('#' + sliderColor).slider('option', 'value');
 
 		$('#' + sliderColor + 'Val').html(value);
 		guess[sliderColor] = parseInt(value);
 
-		var color_string = "rgb(" + guess.red + "," +
-									guess.green + "," +
-									guess.blue + ")";
-		document.getElementById("guess").style.backgroundColor = color_string;
+		var color_string = 'rgb(' + guess.red + ',' +
+									guess.green + ',' +
+									guess.blue + ')';
+		document.getElementById('guess').style.backgroundColor = color_string;
 	};
 
 	/**
@@ -89,11 +89,11 @@ $.fn.hexxed = function(settings) {
 		color.blue  = Math.floor(Math.random()*255);
 		color.green = Math.floor(Math.random()*255);
 
-		var color_string = "rgb(" + color.red + "," +
-									color.green + "," +
-									color.blue + ")";
+		var color_string = 'rgb(' + color.red + ',' +
+									color.green + ',' +
+									color.blue + ')';
 
-		document.getElementById("color").style.backgroundColor = color_string;
+		document.getElementById('color').style.backgroundColor = color_string;
 		time_at_load = (new Date()).getTime();
 	}
 
@@ -124,7 +124,7 @@ $.fn.hexxed = function(settings) {
 		turn_score = (turn_score > 0) ? (Math.round(turn_score*100)/100) : 0;
 
 		// Display the current statistics
-		$("#result").html("Percent: " + percent_off + " | Score: "+turn_score);
+		$('#result').html('Percent: ' + percent_off + ' | Score: '+turn_score);
 
 		// TODO: finish implementing the check functionality
 	}
@@ -135,36 +135,36 @@ $.fn.hexxed = function(settings) {
 	// ==================================
 
 	// Display the color user is trying to match
-	this.append($('<div>').attr("id", "color"));
+	this.append($('<div>').attr('id', 'color'));
 
 	// Display the user's current guess color
-	this.append($('<div>').attr("id", "guess"));
+	this.append($('<div>').attr('id', 'guess'));
 
 	// Clears the floats
 	this.append($('<hr>'))
 
 	// Button that generates new color
-	var newColorBtn = $('<button>').attr("type","button").attr("id", "new");
+	var newColorBtn = $('<button>').attr('type','button').attr('id', 'new');
 
 	// Adds the button to the DOM with text and an action on click
-	this.append(newColorBtn.text("Try a different color").click(newColor););
+	this.append(newColorBtn.text('Try a different color').click(newColor));
 
 	// The sliders the user can manipulate
 	// Red slider
-	this.append($('<div>').attr("id", "red").slider(sliderObject));
+	this.append($('<div>').attr('id', 'red').slider(sliderObject));
 
 	// Green slider
-	this.append($('<div>').attr("id", "green").slider(sliderObject));
+	this.append($('<div>').attr('id', 'green').slider(sliderObject));
 
 	// Blue slider
-	this.append($('<div>').attr("id", "blue").slider(sliderObject));
+	this.append($('<div>').attr('id', 'blue').slider(sliderObject));
 
 	// Current value indicators
 	var redVal = $('<span>').attr('id', 'redVal').text('0'),
 		greenVal = $('<span>').attr('id', 'greenVal').text('0'),
 		blueVal = $('<span>').attr('id', 'blueVal').text('0'),
 		// The wrapping <p> to store the value indicators
-		currentVals = $('<p>').attr("id", "currentVals");
+		currentVals = $('<p>').attr('id', 'currentVals');
 
 	// append the indicators to the <p> with helpful text descriptions
 	currentVals.append('Current: Red ').append(redVal);
@@ -175,13 +175,13 @@ $.fn.hexxed = function(settings) {
 	this.append(currentVals);
 
 	// Submit button
-	var submitBtn = $('<button>').attr("type", "button").attr("id", "submit");
+	var submitBtn = $('<button>').attr('type', 'button').attr('id', 'submit');
 
 	// Add the button to the DOM with text and a function to complete on click
-	this.append(submitBtn.text("Submit!").click(check));
+	this.append(submitBtn.text('Submit!').click(check));
 
 	// Result area
-	this.append($('<div>').attr("id", "result"));
+	this.append($('<div>').attr('id', 'result'));
 
 	// Generate first color
 	newColor();
@@ -192,5 +192,5 @@ $.fn.hexxed = function(settings) {
 
 $(document).ready(function() {
 	// Create a game instance in the div entitled hexxed.
-	$("#hexxed").hexxed();
+	$('#hexxed').hexxed();
 });
