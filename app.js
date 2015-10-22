@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	function main() {
+		newColor();
+	}
+
+	function newColor() {
+		//get random color
+		var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+		document.getElementById("color").style.backgroundColor = color;
+	}
+	
 	var sliderObject = {
 		min:0,
 		max:255,
@@ -18,13 +28,3 @@ var rvalue = $("#red").slider("option", "value");
 var gvalue = $("#green").slider("option", "value");
 var bvalue = $("#blue").slider("option", "value");
 </script>*/
-
-function main() {
-	newColor();
-}
-
-function newColor() {
-	//get random color
-	var color = '#'+Math.floor(Math.random()*16777215).toString(16);
-	document.getElementById("color").style.backgroundColor = color;
-}
