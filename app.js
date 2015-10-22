@@ -151,13 +151,13 @@ $.fn.hexxed = function(settings) {
 
 	// The sliders the user can manipulate
 	// Red slider
-	this.append($('<div>').attr('id', 'red').slider(sliderObject));
+	this.append($('<div>').attr('id', 'red').slider(sliderObject).css('background', 'rgb(255,0,0)'));
 
 	// Green slider
-	this.append($('<div>').attr('id', 'green').slider(sliderObject));
+	this.append($('<div>').attr('id', 'green').slider(sliderObject).css('background', 'rgb(0,255,0)'));
 
 	// Blue slider
-	this.append($('<div>').attr('id', 'blue').slider(sliderObject));
+	this.append($('<div>').attr('id', 'blue').slider(sliderObject).css('background', 'rgb(0,0,255)'));
 
 	// Current value indicators
 	var redVal = $('<span>').attr('id', 'redVal').text('0'),
@@ -193,4 +193,5 @@ $.fn.hexxed = function(settings) {
 $(document).ready(function() {
 	// Create a game instance in the div entitled hexxed.
 	$('#hexxed').hexxed();
+	
 });
