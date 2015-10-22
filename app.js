@@ -61,7 +61,9 @@ $.fn.hexxed = function(settings) {
 		$('#' + sliderColor + 'Val').html(value);
 		guess[sliderColor] = parseInt(value);
 
-		var color_string = "rgb("+guess.red+","+guess.green+","+guess.blue+")";
+		var color_string = "rgb(" + guess.red + "," +
+									guess.green + "," +
+									guess.blue + ")";
 		document.getElementById("guess").style.backgroundColor = color_string;
 	};
 
@@ -78,8 +80,8 @@ $.fn.hexxed = function(settings) {
 	};
 
 	/**
-	 * Generates a new color, adds it to the designated html element, and updates
-	 * the color object.
+	 * Generates a new color, adds it to the designated html element, and
+	 * updates the color object.
 	 */
 	function newColor() {
 		//get random color
@@ -87,15 +89,17 @@ $.fn.hexxed = function(settings) {
 		color.blue  = Math.floor(Math.random()*255);
 		color.green = Math.floor(Math.random()*255);
 
-		var color_string = "rgb(" + color.red + "," + color.green + "," + color.blue + ")";
+		var color_string = "rgb(" + color.red + "," +
+									color.green + "," +
+									color.blue + ")";
 
 		document.getElementById("color").style.backgroundColor = color_string;
 		time_at_load = (new Date()).getTime();
 	}
 
 	/**
-	 * Checks the user's guess against the designated color and generates a score
-	 * based on a number of factors
+	 * Checks the user's guess against the designated color and generates a
+	 * score based on a number of factors
 	 */
 	function check() {
 		// Determine milliseconds elapsed since the color was loaded
@@ -112,13 +116,15 @@ $.fn.hexxed = function(settings) {
 		var percent_off = (percents.red + percents.green + percents.blue)/3;
 
 		// Calculate the turn's score
-		var turn_score = ((15 - settings.difficulty - percent_off) / (15 - settings.difficulty)) * (15000 - milliseconds_taken);
+		var turn_score = ((15 - settings.difficulty - percent_off) /
+						  (15 - settings.difficulty)) *
+						 (15000 - milliseconds_taken);
 
 		// If positive, round to 2 decimals. If negative, set to 0.
 		turn_score = (turn_score > 0) ? (Math.round(turn_score*100)/100) : 0;
 
 		// Display the current statistics
-		$("#result").html("Percent: " + percent_off + "<br/>Score: " + turn_score);
+		$("#result").html("Percent: " + percent_off + " | Score: "+turn_score);
 
 		// TODO: finish implementing the check functionality
 	}
@@ -137,8 +143,11 @@ $.fn.hexxed = function(settings) {
 	// Clears the floats
 	this.append($('<hr>'))
 
-	// Gets new color
-	this.append($('<button>').attr("type","button").attr("id", "new").click(newColor).text("Try a different color"));
+	// Button that generates new color
+	var newColorBtn = $('<button>').attr("type","button").attr("id", "new");
+
+	// Adds the button to the DOM with text and an action on click
+	this.append(newColorBtn.text("Try a different color").click(newColor););
 
 	// The sliders the user can manipulate
 	// Red slider
@@ -166,7 +175,10 @@ $.fn.hexxed = function(settings) {
 	this.append(currentVals);
 
 	// Submit button
-	this.append($('<button>').attr("type", "button").attr("id", "submit").text("Submit!").click(check));
+	var submitBtn = $('<button>').attr("type", "button").attr("id", "submit");
+
+	// Add the button to the DOM with text and a function to complete on click
+	this.append(submitBtn.text("Submit!").click(check));
 
 	// Result area
 	this.append($('<div>').attr("id", "result"));
