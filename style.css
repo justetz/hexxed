@@ -2,12 +2,12 @@ body {
   text-align: center;
 }
 
-div#hexxed {
+#hexxed {
 	width: 50%;
 	margin: 0 auto;
 }
 
-div#color, div#guess {
+#color, #guess {
   margin: 0 auto;
   width: 200px;
   height: 200px;
@@ -18,10 +18,10 @@ hr {
 	color: #000;
 	clear: both;
 }
-div#color {
+#color {
     float: left;
 }
-div#guess {
+#guess {
 	float: right;
 }
 
@@ -38,4 +38,8 @@ div#guess {
 
 #green, #blue {
   margin-top: 20px;
+}
+
+#result {
+	margin-top:10px;
 }
