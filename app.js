@@ -71,7 +71,7 @@ $.fn.hexxed = function(settings) {
     var turns_remaining = settings.turns;
 
     /**
-     * Creates a new jQuery reference to the game board for later DOM manipulation
+     * Creates a new jQuery reference to the game element for DOM manipulation
      */
     var gameElement = this;
 
@@ -95,16 +95,25 @@ $.fn.hexxed = function(settings) {
      * @param  {Object} ui
      */
     function updateGuess(event, ui) {
+        // determine which slider called the function
         var sliderColor = event.target.id;
+
+        // get the value from that slider
         var value = $('#' + sliderColor).slider('option', 'value');
 
+        // Update the respective numerical indicator with the value
         $('#' + sliderColor + 'Val').html(value);
+
+        // Update the guess object with the value
         guess[sliderColor] = parseInt(value);
 
+        // Prepare the guess colors in CSS RGB format for applying to the div
         var color_string = 'rgb(' + guess.red + ',' +
                                     guess.green + ',' +
                                     guess.blue + ')';
-        document.getElementById('guess').style.backgroundColor = color_string;
+
+        // Apply the new guess to the #guess div.
+        $('#guess').css('background', color_string);
     }
 
     /**
@@ -112,16 +121,20 @@ $.fn.hexxed = function(settings) {
      * updates the color object.
      */
     function newColor() {
-        //get random color
+        //get random color RGB components
         color.red   = Math.floor(Math.random()*255);
         color.blue  = Math.floor(Math.random()*255);
         color.green = Math.floor(Math.random()*255);
 
+        // Prepare the guess colors in CSS RGB format for applying to the div
         var color_string = 'rgb(' + color.red   + ',' +
                                     color.green + ',' +
                                     color.blue  + ')';
 
-        document.getElementById('color').style.backgroundColor = color_string;
+        // Apply the new color to the #color div.
+        $('#color').css('background', color_string);
+
+        // Log the current time in milliseconds, used in score calculations
         time_at_load = Date.now();
     }
 
@@ -129,11 +142,23 @@ $.fn.hexxed = function(settings) {
      * Called by the start over button after ending the game.
      */
     function reset() {
+        // remove the elements available to the user at game over
         $('#gameOver').remove();
+
+        // show the game board
         gameElement.children().show();
+
+        // generate a new color
+        // done after showing game board because newColor resets the timer
         newColor();
+
+        // reset the score counter
         final_score = 0;
+
+        // restore turns as defined in settings
         turns_remaining = settings.turns;
+
+        // clear results, as there wouldn't be any
         $('#result').text("");
     }
 
@@ -176,10 +201,28 @@ $.fn.hexxed = function(settings) {
                               "; Turns Left: "  + turns_remaining);
 
         } else {
+            // create a new div element to display game over info for the user
+            // wrapped in a div for easy removing on game reset
             var gameOver = $('<div>').attr('id', 'gameOver');
+            
+            // Add a header to denote game over
             gameOver.append($("<h2>").text("Game Over!"));
+            
+            // 
             gameOver.append($("<p>").text("Final Score: " + total_score));
-            gameOver.append($("<button>").attr("type", "button").text("Try again").click(reset));
+            
+            gameOver.append($('<hr>'));
+            
+            var playerNameInput = $('<input>').attr('placeholder', 'Your name');
+            gameOver.append(playerNameInput.attr('id', 'hsName'));
+            
+            var submit = $('<button>').text("Submit High Score!");
+            submit = submit.attr("type", "button").attr("id","hsSubmit");
+            gameOver.append(submit.click(submitHighscore));
+            
+            gameOver.append($('<hr>'));
+            
+            gameOver.append($("<button>").attr("type", "button").text("Try Again!").click(reset));
 
             gameElement.children().hide();
             gameElement.append(gameOver);
@@ -189,9 +232,21 @@ $.fn.hexxed = function(settings) {
     /**
      * @param  {string} playerName
      */
-    function submitHighscore(playerName) {
+    function submitHighscore() {
+        // keep track of where in local storage the scores will be held
+        // using a variable to ensure consistency among all calls
         var HEXXED_STORAGE_NAME = '_hexxedHighScores';
 
+        // get the player's information from the designated input element
+        var playerName = $('#hsName').val();
+
+        // check to make sure the user included their name, otherwise terminate
+        if(playerName === "") {
+            alert("You need to enter your name to submit a high score!");
+            return;
+        }
+
+        // compile the information to be inputted
         var dataForSubmission = {
             name: playerName,
             difficulty: settings.difficulty,
@@ -200,17 +255,28 @@ $.fn.hexxed = function(settings) {
             timestamp: new Date().toLocaleString()
         };
 
+        // ensure the browser has the capacity for local storage
         if(window.localStorage !== undefined) {
-            var existingData = localStorage.getItem(HEXXED_STORAGE_NAME);
+            // query local storage for any data currently present
+            var data = localStorage.getItem(HEXXED_STORAGE_NAME);
 
             // Determine if to add or create a high scores JSON array
-            if(!existingData) {
-                var data = [dataForSubmission];
-                data = JSON.stringify(data);
-                localStorage.setItem(HEXXED_STORAGE_NAME, data);
+            if(!data) {
+                // no exisiting data, create a new array with the one score
+                data = [dataForSubmission];
             } else {
-
+                // exisiting data, parse the exisiting and add the new
+                data = JSON.parse(data);
+                data.push(dataForSubmission);
             }
+            // convert the JSON back to a string
+            data = JSON.stringify(data);
+
+            // push the newly modified / created data to local storage.
+            localStorage.setItem(HEXXED_STORAGE_NAME, data);
+        } else {
+            // otherwise, notify the user
+            alert("Sorry, your browser does not support local storage.");
         }
     }
 
