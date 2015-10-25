@@ -329,7 +329,7 @@ $.fn.hexxed = function(settings) {
     var submitBtn = $('<button>').attr('type', 'button').attr('id', 'submit');
 
     // Add the button to the DOM with text and a function to complete on click
-    this.append(submitBtn.text('Submit!').click(check));
+    this.append(submitBtn.text('Check my Color!').click(check));
 
     // Result area
     this.append($('<div>').attr('id', 'result'));
