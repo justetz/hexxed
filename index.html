@@ -2,19 +2,24 @@
 <html>
 <head>
 	<title>Hexxed</title>
-	<link rel=stylesheet href="style.css"/>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-    
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script src="app.js"></script>
+	<meta charset="UTF-8">
+	<meta name="description" content="Hexxed is a color matching game written as a jQuery plugin">
+	<meta name="keywords" content="HTML,CSS,JavaScript,jQuery,JSON">
+	<meta name="author" content="Anjin Lima, Tristan Villamil, Justin Etzine">
+
+	<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+	
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </head>
 	<body>
-		<div id="hexxed">
-			<h1>Hexxed</h1>
-		</div>
+		<!-- Create a div to be populated with the hexxed game by the jQuery plugin. -->
+		<!-- By having the plugin manage the DOM for the game, we reduce the risk for representation exposure. -->
+		<div id="hexxed"></div>
 
 		<!-- Describes how to play the game to the user -->
 		<p id="description">
