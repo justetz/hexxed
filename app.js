@@ -285,6 +285,9 @@ $.fn.hexxed = function(settings) {
     //  Adding the game elements to the HTML
     // ==================================
 
+    // Display a header that says 'Hexxed'
+    this.append($('<h1>').text("Hexxed"));
+
     // Display the color user is trying to match
     this.append($('<div>').attr('id', 'color').text("Your Goal"));
 
