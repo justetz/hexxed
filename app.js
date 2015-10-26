@@ -373,4 +373,5 @@ $.fn.hexxed = function(settings) {
 $(document).ready(function() {
     // Create a game instance in the div entitled hexxed.
     $('#hexxed').hexxed();
+	//$('#hexxed').hexxed({ turns: 10, difficulty: 5 });
 });
