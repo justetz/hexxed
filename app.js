@@ -192,7 +192,10 @@ $.fn.hexxed = function(settings) {
         total_score += turn_score;
 		total_score = (Math.round(total_score*100)/100)
 
+		// decrease the turn count
         turns_remaining--;
+
+		// check if no turns remain
         if(turns_remaining > 0) {
             newColor();
 
@@ -209,23 +212,32 @@ $.fn.hexxed = function(settings) {
             // Add a header to denote game over
             gameOver.append($("<h2>").text("Game Over!"));
 
-            //
+            // Show the final score from the game
             gameOver.append($("<p>").text("Final Score: " + total_score));
 
-            gameOver.append($('<hr>'));
-
+			// Create the input for players to input a name for their high score
             var playerNameInput = $('<input>').attr('placeholder', 'Your name');
+
+			// Add the input to the page with an ID for easy value access
             gameOver.append(playerNameInput.attr('id', 'hsName'));
 
+			// Create a submit button to send the score to the high scores array
             var submit = $('<button>').text("Submit High Score!");
             submit = submit.attr("type", "button").attr("id","hsSubmit");
+
+			// Show the button
             gameOver.append(submit.click(submitHighscore));
 
-            gameOver.append($('<hr>'));
+			// Create a try again buton to allow users to restart the game over
+			var againButton = $("<button>").text("Try Again!");
 
-            gameOver.append($("<button>").attr("type", "button").text("Try Again!").click(reset));
+			// Show the button
+            gameOver.append(againButton.attr("type", "button").click(reset));
 
+			// Hide the game so they can't keep playing
             gameElement.children().hide();
+
+			// Add the game over elements
             gameElement.append(gameOver);
         }
     }
@@ -247,6 +259,7 @@ $.fn.hexxed = function(settings) {
             return;
         }
 
+		// Disable the input and submit to prevent repeat submissions
 		$('#hsName').prop('disabled', true);
 		$('#hsSubmit').prop('disabled', true);
 
@@ -281,11 +294,12 @@ $.fn.hexxed = function(settings) {
             // push the newly modified / created data to local storage.
             localStorage.setItem(HEXXED_STORAGE_NAME, data);
 
+			// Notify the user that the score was successfully saved!
 			$('#hsName').remove();
 			$('#hsSubmit').remove();
 			$('#gameOver').append($('<h3>').text("Submitted!"));
         } else {
-            // otherwise, notify the user
+            // otherwise, notify the user that local storage isn't allowed
 			$('#hsName').remove();
 			$('#hsSubmit').remove();
 			$('#gameOver').append($('<h3>').text("Sorry, your browser does not support local storage."));
