@@ -74,7 +74,7 @@ input {
 
 #color, #guess {
   margin: 0 auto;
-  width: 180px;
+  width: 30%;
   height: 180px;
   border: 1px solid #000000;
   border-radius: 10px;
